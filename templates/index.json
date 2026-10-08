@@ -12,51 +12,19 @@
     "main": {
       "type": "aurex-store",
       "settings": {
+        "hero_image": "shopify://shop_images/Escaparate_de_lujo_negro_con_neon_rojo.png",
         "eyebrow": "CUIDADO PERSONAL • BIENESTAR • CALIDAD",
         "title": "Cuida de ti.",
         "title_red": "Siéntete mejor.",
+        "title_script": "Todos los días.",
         "text": "Productos seleccionados para acompañarte en tu rutina de cuidado personal y bienestar.",
         "button": "Descubrir productos",
         "button2": "",
-        "catalog_title": "Productos destacados",
-        "title_script": "Todos los días."
+        "catalog_title": "Productos destacados"
       }
-    },
-    "nosotros": {
-      "type": "aurex-about",
-      "blocks": {
-        "v1": {
-          "type": "value",
-          "settings": {
-            "number": "+1.000",
-            "label": "clientes felices"
-          }
-        },
-        "v2": {
-          "type": "value",
-          "settings": {
-            "number": "48 h",
-            "label": "entrega promedio"
-          }
-        },
-        "v3": {
-          "type": "value",
-          "settings": {
-            "number": "100%",
-            "label": "compra segura"
-          }
-        }
-      },
-      "block_order": [
-        "v1",
-        "v2",
-        "v3"
-      ],
-      "settings": {}
     }
   },
   "order": [
-    "main",
-    "nosotros"
+    "main"
   ]
 }

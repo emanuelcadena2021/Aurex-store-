@@ -8,6 +8,7 @@ Ecommerce del Taller 3: **Angular → API ASP.NET Core → Entity Framework → 
 | `api/Taller3_Ecommerce_API/` | API .NET 10 + EF Core + Pomelo MySQL (abrir el `.csproj` en Visual Studio) |
 | `database/taller3_ecommerce.sql` | Script que crea la base, la tabla `products` y los productos |
 | `aurex-store.html` | Versión estática de demostración (doble clic para abrir) |
+| `shopify/aurex-shopify.html` | Mismo diseño listo para pegar en una sección "Liquid personalizado" de Shopify |
 
 ## Cómo ejecutarlo
 

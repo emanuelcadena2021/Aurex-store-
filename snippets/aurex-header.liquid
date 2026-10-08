@@ -1,0 +1,6 @@
+<header><div class="wrap bar">
+  <a class="logo" href="{{ routes.root_url }}">AUREX<b>STORE</b></a>
+  <form class="search" action="{{ routes.search_url }}" method="get" role="search"><input id="q" name="q" type="search" value="{{ search.terms | escape }}" placeholder="Buscar productos..." aria-label="Buscar productos"></form>
+  {% if shop.customer_accounts_enabled %}<a class="btn ghost" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">{% if customer %}Hola, {{ customer.first_name | default: 'cliente' }}{% else %}Ingresar{% endif %}</a>{% endif %}
+  <a class="cartbtn" id="openCart" href="{{ routes.cart_url }}">Carrito<span id="cc">{{ cart.item_count }}</span></a>
+</div></header>

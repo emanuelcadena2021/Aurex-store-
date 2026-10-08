@@ -1,0 +1,8 @@
+<main class="wrap page" style="max-width:480px">
+  <h1>Iniciar sesión</h1>
+  {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <div class="form"><input type="email" name="customer[email]" placeholder="Correo electrónico" required><input type="password" name="customer[password]" placeholder="Contraseña" required><button class="btn red">Ingresar</button></div>
+  {% endform %}
+  <p class="rte">¿No tienes cuenta? <a href="{{ routes.account_register_url }}" style="color:var(--ax-red2)">Regístrate</a></p>
+</main>

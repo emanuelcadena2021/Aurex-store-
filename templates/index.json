@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "aurex-store" } },
+  "order": ["main"]
+}

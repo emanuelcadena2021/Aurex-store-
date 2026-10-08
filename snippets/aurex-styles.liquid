@@ -1,104 +1,69 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
-<style>
-/* Layout: barra fija, hero diagonal rojo/negro, filtros en chips, grilla de producto, carrito lateral */
-#aurex{
-  --ax-bg:#0b0b0c; --ax-panel:#141416; --ax-line:#26262a; --ax-fg:#f4f1f1; --ax-muted:#9a9499;
-  --ax-red:#e10b1e; --ax-red2:#ff3347; --ax-ok:#3ccf7a;
-  --ax-display:"Archivo Black",Impact,"Arial Black",sans-serif;
-  --ax-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --ax-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
-  color-scheme:dark;
+
+#aurex .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 78% 35%,
+      rgba(225, 11, 30, 0.20) 0%,
+      rgba(225, 11, 30, 0.07) 28%,
+      transparent 58%
+    ),
+    linear-gradient(
+      110deg,
+      #08090b 0%,
+      #101114 55%,
+      #16090c 100%
+    );
+  opacity: 1;
+  pointer-events: none;
 }
-#aurex,#aurex *{box-sizing:border-box}
-#aurex [hidden]{display:none!important}
-#aurex{background:var(--ax-bg);color:var(--ax-fg);font-family:var(--ax-body);font-size:15px;line-height:1.5}
-#aurex a{color:inherit;text-decoration:none}
-#aurex button{font:inherit;cursor:pointer}
-#aurex button:focus-visible,#aurex input:focus-visible,#aurex a:focus-visible{outline:2px solid var(--ax-red2);outline-offset:2px}
-#aurex .wrap{max-width:1200px;margin:0 auto;padding-inline:20px}
-#aurex header{position:relative;z-index:2;background:color-mix(in srgb,var(--ax-bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ax-line)}
-#aurex .bar{display:flex;align-items:center;gap:20px;height:68px}
-#aurex .logo{font-family:var(--ax-display);font-size:24px;letter-spacing:.5px}
-#aurex .logo b{color:var(--ax-red)}
-#aurex .search{flex:1;max-width:420px;margin-left:auto}
-#aurex .search input{width:100%;background:var(--ax-panel);border:1px solid var(--ax-line);color:var(--ax-fg);padding:11px 14px;border-radius:999px}
-#aurex .cartbtn{position:relative;background:var(--ax-red);color:#fff;border:0;padding:10px 18px;border-radius:999px;font-weight:800;white-space:nowrap}
-#aurex .cartbtn span{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-left:6px;background:#000;border-radius:999px;font-size:12px}
-#aurex .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--ax-line)}
-#aurex .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 52%,var(--ax-red) 52%,var(--ax-red) 70%,#7a0510 70%);opacity:.95}
-#aurex .hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;padding-block:64px}
-#aurex .eyebrow{font-family:var(--ax-mono);font-size:12px;letter-spacing:2px;color:var(--ax-red2);text-transform:uppercase}
-#aurex .hero h1{font-family:var(--ax-display);font-size:clamp(38px,6.5vw,76px);line-height:.95;margin:14px 0 18px;text-wrap:balance}
-#aurex .hero h1 em{font-style:normal;color:var(--ax-red)}
-#aurex .hero p{color:var(--ax-muted);max-width:46ch;font-size:17px}
-#aurex .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
-#aurex .btn{border:0;border-radius:10px;padding:14px 22px;font-weight:800}
-#aurex .btn.red{background:var(--ax-red);color:#fff}
-#aurex .btn.ghost{background:transparent;color:var(--ax-fg);border:1px solid var(--ax-line)}
-#aurex .btn.red:hover{background:var(--ax-red2)}
-#aurex .stats{display:flex;gap:28px;margin-top:34px;font-family:var(--ax-mono);font-size:12px;color:var(--ax-muted)}
-#aurex .stats strong{display:block;font-family:var(--ax-display);font-size:26px;color:var(--ax-fg)}
-#aurex .feature{align-self:center;justify-self:end;width:min(360px,100%);background:#000;border:1px solid #3a0a10;border-radius:20px;padding:22px;box-shadow:0 30px 60px -20px #000}
-#aurex .feature .tag{font-family:var(--ax-mono);font-size:11px;background:var(--ax-red);color:#fff;padding:4px 8px;border-radius:6px}
-#aurex .feature .art{height:180px;margin:16px 0;border-radius:14px;display:grid;place-items:center}
-#aurex .feature h3{margin:0;font-size:20px}
-#aurex .feature .price{font-family:var(--ax-display);font-size:28px;color:var(--ax-red2)}
-#aurex .shop{padding-block:56px}
-#aurex .head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-#aurex .head h2{font-family:var(--ax-display);font-size:clamp(28px,4vw,40px);margin:6px 0 0}
-#aurex .count{font-family:var(--ax-mono);color:var(--ax-muted);font-size:13px}
-#aurex .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
-#aurex .chip{background:var(--ax-panel);color:var(--ax-muted);border:1px solid var(--ax-line);border-radius:999px;padding:8px 16px;font-weight:600}
-#aurex .chip[aria-pressed="true"]{background:var(--ax-fg);color:var(--ax-bg);border-color:var(--ax-fg)}
-#aurex .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
-#aurex .card{background:var(--ax-panel);border:1px solid var(--ax-line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
-#aurex .card:hover{transform:translateY(-4px);border-color:var(--ax-red)}
-#aurex .art{position:relative;aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#2a0a0e,#000 70%)}
-#aurex .art svg{width:42%;height:auto;color:var(--ax-red)}
-#aurex .art .cat{position:absolute;top:12px;left:12px;font-family:var(--ax-mono);font-size:11px;color:var(--ax-muted);text-transform:uppercase;letter-spacing:1px}
-#aurex .art .low{position:absolute;top:12px;right:12px;font-family:var(--ax-mono);font-size:11px;background:var(--ax-red);color:#fff;padding:3px 7px;border-radius:5px}
-#aurex .info{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
-#aurex .info h3{margin:0;font-size:16px}
-#aurex .info p{margin:0;color:var(--ax-muted);font-size:13px;flex:1}
-#aurex .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-#aurex .price{font-family:var(--ax-display);font-size:20px;font-variant-numeric:tabular-nums}
-#aurex .stock{font-family:var(--ax-mono);font-size:11px;color:var(--ax-ok)}
-#aurex .add{margin-top:12px;width:100%;background:transparent;border:1px solid var(--ax-red);color:var(--ax-fg);padding:10px;border-radius:10px;font-weight:800}
-#aurex .add:hover{background:var(--ax-red)}
-#aurex .perks{border-top:1px solid var(--ax-line);border-bottom:1px solid var(--ax-line)}
-#aurex .perks .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-block:28px}
-#aurex .perks div{font-size:13px;color:var(--ax-muted)}
-#aurex .perks strong{display:block;color:var(--ax-fg);font-size:15px}
-#aurex footer{padding-block:30px;color:var(--ax-muted);font-size:13px}
-#aurex footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-#aurex .drawer{position:fixed;inset:0;z-index:9999;display:flex;justify-content:flex-end;background:#000a}
-#aurex .panel{width:min(420px,100%);height:100%;background:var(--ax-panel);border-left:1px solid var(--ax-line);display:flex;flex-direction:column;padding:22px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
-#aurex .panel h2{font-family:var(--ax-display);margin:0 0 14px;display:flex;justify-content:space-between;align-items:center}
-#aurex .x{background:none;border:0;color:var(--ax-muted);font-size:24px}
-#aurex .items{flex:1;overflow:auto;display:flex;flex-direction:column;gap:12px}
-#aurex .item{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding-bottom:12px;border-bottom:1px solid var(--ax-line)}
-#aurex .item small{color:var(--ax-muted);font-family:var(--ax-mono)}
-#aurex .qty{display:flex;gap:6px;align-items:center}
-#aurex .qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--ax-line);background:var(--ax-bg);color:var(--ax-fg)}
-#aurex .total{display:flex;justify-content:space-between;font-family:var(--ax-display);font-size:22px;margin:16px 0}
-#aurex .form{display:grid;gap:8px}
-#aurex .form input{background:var(--ax-bg);border:1px solid var(--ax-line);color:var(--ax-fg);padding:11px;border-radius:8px}
-#aurex .empty,#aurex .done{color:var(--ax-muted);text-align:center;padding:40px 0}
-#aurex .done strong{display:block;color:var(--ax-fg);font-family:var(--ax-display);font-size:22px}
-#aurex .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ax-fg);color:var(--ax-bg);padding:10px 18px;border-radius:999px;font-weight:800;z-index:10000}
-@media(max-width:820px){#aurex .hero .wrap{grid-template-columns:1fr}#aurex .feature{justify-self:start}#aurex .perks .wrap{grid-template-columns:1fr 1fr}#aurex .search{display:none}}
-@media(prefers-reduced-motion:reduce){#aurex *{transition:none!important}}
-</style>
-<style>
-#aurex .art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-#aurex .page{padding-block:48px;min-height:50vh}
-#aurex .page h1{font-family:var(--ax-display);font-size:clamp(28px,4vw,44px);margin:0 0 20px}
-#aurex .rte{color:var(--ax-muted);max-width:70ch}
-#aurex .pdp{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-#aurex .pdp img{width:100%;border-radius:16px;background:var(--ax-panel)}
-#aurex .pdp select,#aurex .pdp input,#aurex .cart-row input{background:var(--ax-panel);color:var(--ax-fg);border:1px solid var(--ax-line);border-radius:8px;padding:10px}
-#aurex .cart-row{display:grid;grid-template-columns:80px 1fr auto auto;gap:16px;align-items:center;padding-block:14px;border-bottom:1px solid var(--ax-line)}
-#aurex .cart-row img{width:80px;border-radius:10px}
-#aurex .pager{display:flex;gap:10px;margin-top:24px;color:var(--ax-muted)}
-@media(max-width:820px){#aurex .pdp{grid-template-columns:1fr}#aurex .cart-row{grid-template-columns:60px 1fr}}
-</style>
+
+#aurex .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid #292126;
+}
+
+#aurex .hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+#aurex .hero h1 em {
+  color: #e51b2b;
+}
+
+#aurex .btn.red {
+  background: linear-gradient(135deg, #e51b2b, #b80919);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(225, 11, 30, 0.18);
+}
+
+#aurex .btn.red:hover {
+  background: #f02b3d;
+  transform: translateY(-1px);
+}
+
+#aurex .card {
+  background: linear-gradient(145deg, #171719, #101012);
+  border: 1px solid #29292e;
+  border-radius: 18px;
+}
+
+#aurex .card:hover {
+  border-color: rgba(229, 27, 43, 0.7);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+#aurex .art {
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(225, 11, 30, 0.13),
+      transparent 58%
+    ),
+    #0b0b0d;
+}

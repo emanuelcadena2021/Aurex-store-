@@ -13,7 +13,7 @@
   <div id="aurex">
     {% unless template.name == 'index' %}{% render 'aurex-header' %}{% endunless %}
     {{ content_for_layout }}
-    {% unless template.name == 'index' %}{% render 'aurex-footer' %}{% endunless %}
+    {% render 'aurex-footer' %}
   </div>
 </body>
 </html>

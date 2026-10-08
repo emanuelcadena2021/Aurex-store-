@@ -21,9 +21,42 @@
         "catalog_title": "Productos destacados",
         "title_script": "Todos los días."
       }
+    },
+    "nosotros": {
+      "type": "aurex-about",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "number": "+1.000",
+            "label": "clientes felices"
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "number": "48 h",
+            "label": "entrega promedio"
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "number": "100%",
+            "label": "compra segura"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "nosotros"
   ]
 }

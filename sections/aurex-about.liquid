@@ -1,0 +1,118 @@
+<style>
+#aurex .about{position:relative;padding-block:80px;border-top:1px solid var(--ax-line);background:radial-gradient(ellipse at 10% 0%,rgba(217,16,36,.12),transparent 45%),var(--ax-bg)}
+#aurex .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+#aurex .about-media{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;max-width:100%;background:radial-gradient(circle at 30% 20%,#2a0a0e,#000 70%);border:1px solid var(--ax-line)}
+#aurex .about-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#aurex .about-media .ph{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--ax-display);font-size:clamp(40px,6vw,72px);color:var(--ax-red);letter-spacing:4px}
+#aurex .about-media::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:var(--ax-red)}
+#aurex .about h2{font-family:var(--ax-display);font-size:clamp(30px,4vw,48px);line-height:1.05;margin:14px 0 18px;text-wrap:balance}
+#aurex .about h2 em{font-style:normal;color:var(--ax-red)}
+#aurex .about .rte{color:#cfcfcf;font-size:16px;max-width:60ch}
+#aurex .about .rte p{margin:0 0 12px}
+#aurex .values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+#aurex .value{background:var(--ax-panel);border:1px solid var(--ax-line);border-radius:14px;padding:16px}
+#aurex .value strong{display:block;font-family:var(--ax-display);font-size:22px;color:var(--ax-red)}
+#aurex .value span{font-size:13px;color:var(--ax-muted)}
+#aurex .contact{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:56px}
+#aurex .contact a,#aurex .contact div{display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:center;background:var(--ax-panel);border:1px solid var(--ax-line);border-radius:14px;padding:16px;transition:border-color .2s}
+#aurex .contact a:hover{border-color:var(--ax-red)}
+#aurex .contact i{grid-row:span 2;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ax-red);color:var(--ax-red)}
+#aurex .contact i svg{width:20px;height:20px}
+#aurex .contact b{font-size:14px}
+#aurex .contact small{color:var(--ax-muted);font-size:13px;overflow-wrap:anywhere}
+#aurex .socials{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+#aurex .socials a{border:1px solid var(--ax-line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700}
+#aurex .socials a:hover{border-color:var(--ax-red);color:var(--ax-red2)}
+@media(max-width:900px){#aurex .about-grid{grid-template-columns:1fr}#aurex .about-media{aspect-ratio:16/10}#aurex .contact{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){#aurex .values,#aurex .contact{grid-template-columns:1fr}}
+</style>
+
+<section class="about" id="nosotros">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-media">
+        {%- if section.settings.image -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(max-width: 900px) 100vw, 50vw', widths: '600,900,1200', alt: section.settings.title }}
+        {%- else -%}
+          <span class="ph">AUREX</span>
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+        <h2>{{ section.settings.title }}{% if section.settings.title_red != blank %} <em>{{ section.settings.title_red }}</em>{% endif %}</h2>
+        <div class="rte">{{ section.settings.text }}</div>
+        {%- if section.blocks.size > 0 -%}
+        <div class="values">
+          {%- for block in section.blocks -%}
+            <div class="value" {{ block.shopify_attributes }}><strong>{{ block.settings.number }}</strong><span>{{ block.settings.label }}</span></div>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+        <div class="socials">
+          {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
+          {%- if section.settings.facebook != blank -%}<a href="{{ section.settings.facebook }}" target="_blank" rel="noopener">Facebook</a>{%- endif -%}
+          {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener">TikTok</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="contact">
+      {%- if section.settings.whatsapp != blank -%}
+      {%- assign wa = section.settings.whatsapp | remove: ' ' | remove: '+' | remove: '-' -%}
+      <a href="https://wa.me/{{ wa }}" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.2 2 1-.5 1.6c-3.5.3-7.3-3.4-7-7l1.6-.5 1 2z"/></svg></i><b>WhatsApp</b><small>{{ section.settings.whatsapp }}</small></a>
+      {%- endif -%}
+      {%- if section.settings.email != blank -%}
+      <a href="mailto:{{ section.settings.email }}"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><b>Correo</b><small>{{ section.settings.email }}</small></a>
+      {%- endif -%}
+      {%- if section.settings.address != blank -%}
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></i><b>Ubicación</b><small>{{ section.settings.address }}</small></div>
+      {%- endif -%}
+      {%- if section.settings.hours != blank -%}
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><b>Horario</b><small>{{ section.settings.hours }}</small></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre nosotros",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto (equipo, tienda o productos)" },
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "Sobre nosotros" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Somos Aurex," },
+    { "type": "text", "id": "title_red", "label": "Título (parte roja)", "default": "tu tienda de bienestar." },
+    { "type": "richtext", "id": "text", "label": "Quiénes somos", "default": "<p>Somos una tienda colombiana dedicada al cuidado personal, el bienestar y el fitness. Seleccionamos cada producto pensando en tu calidad de vida.</p><p>Enviamos a toda Colombia y te acompañamos antes, durante y después de tu compra.</p>" },
+    { "type": "header", "content": "Datos de contacto" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp (con indicativo, ej. 573001234567)" },
+    { "type": "text", "id": "email", "label": "Correo" },
+    { "type": "text", "id": "address", "label": "Ciudad / dirección", "default": "Colombia" },
+    { "type": "text", "id": "hours", "label": "Horario de atención", "default": "Lunes a sábado, 8:00 a. m. – 6:00 p. m." },
+    { "type": "header", "content": "Redes sociales" },
+    { "type": "url", "id": "instagram", "label": "Instagram" },
+    { "type": "url", "id": "facebook", "label": "Facebook" },
+    { "type": "url", "id": "tiktok", "label": "TikTok" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Dato destacado",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Número o palabra", "default": "+1.000" },
+        { "type": "text", "id": "label", "label": "Descripción", "default": "clientes felices" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sobre nosotros",
+      "blocks": [
+        { "type": "value", "settings": { "number": "+1.000", "label": "clientes felices" } },
+        { "type": "value", "settings": { "number": "48 h", "label": "entrega promedio" } },
+        { "type": "value", "settings": { "number": "100%", "label": "compra segura" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 760 260" width="1520" height="520"><rect x="0" y="-10" width="760" height="260" fill="#0b0b0c"/><g fill="none" stroke="#f4f1f1" stroke-width="14" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10">
+  <path d="M40 140 L85 30 L130 140"/>
+  <path d="M175 30 V95 a45 45 0 0 0 90 0 V30"/>
+  <path d="M315 140 V30 H370 a32 32 0 0 1 0 64 H315"/><path d="M352 94 L398 140" stroke-linecap="butt"/>
+  <path d="M450 30 H535 M462 85 H535 M450 140 H535"/>
+</g>
+<g stroke="#e10b1e" stroke-width="16" stroke-linecap="square"><path d="M580 30 L690 140 M690 30 L580 140"/></g>
+<text x="365" y="222" text-anchor="middle" fill="#f4f1f1" font-family="Montserrat,Arial,Helvetica,sans-serif" font-size="34" font-weight="500" letter-spacing="26">STORE</text></svg>

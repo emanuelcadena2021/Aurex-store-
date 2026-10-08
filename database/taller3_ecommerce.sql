@@ -22,3 +22,13 @@ INSERT INTO products (name, price, stock, description, image_url) VALUES
 ('Smartphone Nova R', 1899900, 12, 'Pantalla AMOLED 6,7", 256 GB.', 'https://picsum.photos/seed/celular/400/300'),
 ('Smartwatch Blaze', 399900, 18, 'GPS, ritmo cardíaco, 10 días de batería.', 'https://picsum.photos/seed/reloj/400/300'),
 ('Cargador GaN 65 W', 119900, 40, 'Tres puertos, carga rápida para laptop.', 'https://picsum.photos/seed/cargador/400/300');
+
+-- Usuarios para el login (las contraseñas se guardan cifradas desde la API)
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(30) NOT NULL DEFAULT 'Cliente',
+  created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+);

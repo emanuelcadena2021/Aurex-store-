@@ -3,6 +3,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProductService } from './product.service';
+import { AuthService } from './auth.service';
 import { Product } from './product.model';
 
 @Component({
@@ -19,7 +20,12 @@ import { Product } from './product.model';
     </nav>
     <div class="right">
       <input [(ngModel)]="search" placeholder="Buscar productos...">
-      <a routerLink="/login" class="user">👤</a>
+      @if (auth.user(); as u) {
+        <span class="user">Hola, {{ u.name }}</span>
+        <button class="logout" (click)="auth.logout()">Salir</button>
+      } @else {
+        <a routerLink="/login" class="user">👤 Ingresar</a>
+      }
     </div>
   </header>
 
@@ -62,6 +68,7 @@ import { Product } from './product.model';
 })
 export class HomeComponent {
   private service = inject(ProductService);
+  auth = inject(AuthService);
   products: Product[] = [];
   search = '';
   loading = true;

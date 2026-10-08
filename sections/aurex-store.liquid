@@ -6,10 +6,10 @@
 
 <section class="hero" id="top"><div class="wrap">
   <div>
-    <div class="eyebrow">Temporada 2026 · Envíos a toda Colombia</div>
-    <h1>Tecnología que <em>pega</em> fuerte.</h1>
-    <p>Audio, gaming y accesorios seleccionados. Pagas al recibir, devuelves en 30 días.</p>
-    <div class="cta"><a class="btn red" href="#tienda">Ver catálogo</a><button class="btn ghost" id="ofertas">Ofertas de la semana</button></div>
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h1>{{ section.settings.title }} <em>{{ section.settings.title_red }}</em></h1>
+    <p>{{ section.settings.text }}</p>
+    <div class="cta"><a class="btn red" href="#tienda">{{ section.settings.button }}</a><button class="btn ghost" id="ofertas">{{ section.settings.button2 }}</button></div>
     <div class="stats"><div><strong id="nprod">0</strong>productos</div><div><strong>48 h</strong>entrega</div><div><strong>4,9</strong>valoración</div></div>
   </div>
   <div class="feature" id="feature"></div>
@@ -23,7 +23,7 @@
 </div></section>
 
 <main class="wrap shop" id="tienda">
-  <div class="head"><div><div class="eyebrow">Catálogo</div><h2>Productos destacados</h2></div><div class="count" id="count"></div></div>
+  <div class="head"><div><div class="eyebrow">Catálogo</div><h2>{{ section.settings.catalog_title }}</h2></div><div class="count" id="count"></div></div>
   <div class="chips" id="chips"></div>
   <div class="grid" id="grid"></div>
 </main>
@@ -127,7 +127,15 @@ if(SHOPIFY)fetch("/cart.js").then(r=>r.json()).then(syncCart).catch(()=>{});
 {% schema %}
 {
   "name": "Aurex Store",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "Temporada 2026 · Envíos a toda Colombia" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Tecnología que" },
+    { "type": "text", "id": "title_red", "label": "Título (parte roja)", "default": "pega fuerte." },
+    { "type": "textarea", "id": "text", "label": "Descripción", "default": "Audio, gaming y accesorios seleccionados. Pagas al recibir, devuelves en 30 días." },
+    { "type": "text", "id": "button", "label": "Botón principal", "default": "Ver catálogo" },
+    { "type": "text", "id": "button2", "label": "Botón secundario", "default": "Ofertas de la semana" },
+    { "type": "text", "id": "catalog_title", "label": "Título del catálogo", "default": "Productos destacados" }
+  ],
   "presets": [{ "name": "Aurex Store" }]
 }
 {% endschema %}

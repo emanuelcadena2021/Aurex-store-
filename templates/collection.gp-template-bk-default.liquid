@@ -1,0 +1,16 @@
+<main class="wrap page">
+  <h1>{{ collection.title }}</h1>
+  {% paginate collection.products by 24 %}
+  <div class="grid">
+    {% for p in collection.products %}
+    <article class="card">
+      <a class="art" href="{{ p.url }}">{% if p.featured_image %}<img src="{{ p.featured_image | image_url: width: 600 }}" alt="" loading="lazy" width="600" height="450">{% endif %}<span class="cat">{{ p.type }}</span></a>
+      <div class="info"><h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
+        <div class="row"><span class="price">{{ p.price | money }}</span></div>
+        <a class="add" style="text-align:center" href="{{ p.url }}">Ver producto</a></div>
+    </article>
+    {% else %}<p class="empty">No hay productos.</p>{% endfor %}
+  </div>
+  {% if paginate.pages > 1 %}<div class="pager">{{ paginate | default_pagination }}</div>{% endif %}
+  {% endpaginate %}
+</main>

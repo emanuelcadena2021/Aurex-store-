@@ -1,0 +1,20 @@
+<main class="wrap page">
+  <div class="pdp">
+    {% if product.featured_image %}<img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape }}" width="900" height="{{ 900 | divided_by: product.featured_image.aspect_ratio | round }}">{% else %}<div class="art" style="border-radius:16px"></div>{% endif %}
+    <div>
+      <div class="eyebrow">{{ product.type }}</div>
+      <h1>{{ product.title }}</h1>
+      <div class="price" style="font-size:28px;color:var(--ax-red2)">{{ product.price | money }}</div>
+      <div class="rte" style="margin:16px 0">{{ product.description }}</div>
+      {% form 'product', product %}
+        {% if product.has_only_default_variant %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% else %}
+          <select name="id" aria-label="Variante">{% for v in product.variants %}<option value="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>{{ v.title }} · {{ v.price | money }}</option>{% endfor %}</select>
+        {% endif %}
+        <input type="number" name="quantity" value="1" min="1" aria-label="Cantidad" style="width:80px">
+        <button class="btn red" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Agregar al carrito{% else %}Agotado{% endif %}</button>
+      {% endform %}
+    </div>
+  </div>
+</main>

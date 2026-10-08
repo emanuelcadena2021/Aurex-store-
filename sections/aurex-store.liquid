@@ -985,3 +985,144 @@
 
 }
 </style>
+<header><div class="wrap bar">
+  <a class="logo" href="#top">AUREX<b>STORE</b></a>
+  <div class="search"><input id="q" type="search" placeholder="Buscar productos..." aria-label="Buscar productos"></div>
+  <button class="cartbtn" id="openCart">Carrito<span id="cc">{{ cart.item_count }}</span></button>
+</div></header>
+
+<section class="hero" id="top"><div class="wrap">
+  <div>
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h1>{{ section.settings.title }} <em>{{ section.settings.title_red }}</em></h1>
+    <p>{{ section.settings.text }}</p>
+    <div class="cta"><a class="btn red" href="#tienda">{{ section.settings.button }}</a><button class="btn ghost" id="ofertas">{{ section.settings.button2 }}</button></div>
+    <div class="stats"><div><strong id="nprod">0</strong>productos</div><div><strong>48 h</strong>entrega</div><div><strong>4,9</strong>valoración</div></div>
+  </div>
+  <div class="feature" id="feature"></div>
+</div></section>
+
+<section class="perks"><div class="wrap">
+  <div><strong>Envío gratis</strong>en compras desde $200.000</div>
+  <div><strong>Pago contraentrega</strong>efectivo o tarjeta</div>
+  <div><strong>Garantía 12 meses</strong>en todos los equipos</div>
+  <div><strong>Soporte</strong>lunes a sábado</div>
+</div></section>
+
+<main class="wrap shop" id="tienda">
+  <div class="head"><div><div class="eyebrow">Catálogo</div><h2>{{ section.settings.catalog_title }}</h2></div><div class="count" id="count"></div></div>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer><div class="wrap"><span>© {{ 'now' | date: '%Y' }} {{ shop.name }} · Aurex Store</span><span>Pagos seguros con Shopify</span></div></footer>
+
+<div class="drawer" id="drawer" hidden><div class="panel" role="dialog" aria-label="Carrito">
+  <h2>Tu carrito <button class="x" id="closeCart" aria-label="Cerrar">×</button></h2>
+  <div class="items" id="items"></div>
+  <div id="checkout"></div>
+</div></div>
+<div class="toast" id="toast" hidden></div>
+<script>
+(function(){
+const ICONS={
+ Audio:'<path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-7h3M4 13v5a2 2 0 0 0 2 2h1v-7H4"/>',
+ Gaming:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/>',
+ Computación:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M1 20h22"/>',
+ Celulares:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+ Accesorios:'<circle cx="12" cy="12" r="6"/><path d="M9 3h6l1 4M9 21h6l1-4M8 7 9 3M8 17l1 4"/>'
+};
+const SHOPIFY={% if collections.all.products_count > 0 %}true{% else %}false{% endif %};
+const PRODUCTS=SHOPIFY?[{% for p in collections.all.products limit: 50 %}{% assign v = p.selected_or_first_available_variant %}{"id":{{ v.id }},"name":{{ p.title | json }},"cat":{{ p.type | default: 'Accesorios' | json }},"price":{{ p.price | divided_by: 100 }},"stock":{% if v.inventory_management and v.inventory_quantity > 0 %}{{ v.inventory_quantity }}{% else %}99{% endif %},"description":{{ p.description | strip_html | truncate: 90 | json }},"image":{% if p.featured_image %}{{ p.featured_image | image_url: width: 600 | json }}{% else %}""{% endif %},"url":{{ p.url | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]:[
+ {id:1,name:"Audífonos Pulse X",cat:"Audio",price:289900,stock:14,description:"Cancelación activa de ruido y 40 h de batería."},
+ {id:2,name:"Parlante Volt 360",cat:"Audio",price:219900,stock:4,description:"Sonido envolvente, resistente al agua IP67."},
+ {id:3,name:"Teclado Mecánico K87",cat:"Gaming",price:249900,stock:22,description:"Switches rojos, retroiluminación RGB."},
+ {id:4,name:"Mouse Viper Pro",cat:"Gaming",price:159900,stock:31,description:"26.000 DPI, 58 g, inalámbrico."},
+ {id:5,name:"Control Inferno",cat:"Gaming",price:199900,stock:3,description:"Compatible con PC y consola, gatillos hápticos."},
+ {id:6,name:"Laptop Aurex 14",cat:"Computación",price:3299900,stock:6,description:"Ryzen 7, 16 GB RAM, SSD 1 TB."},
+ {id:7,name:"Monitor Crimson 27\"",cat:"Computación",price:1149900,stock:9,description:"QHD 165 Hz, panel IPS."},
+ {id:8,name:"Smartphone Nova R",cat:"Celulares",price:1899900,stock:12,description:"Pantalla AMOLED 6,7\", 256 GB."},
+ {id:9,name:"Smartwatch Blaze",cat:"Accesorios",price:399900,stock:18,description:"GPS, ritmo cardíaco, 10 días de batería."},
+ {id:10,name:"Cargador GaN 65 W",cat:"Accesorios",price:119900,stock:40,description:"Tres puertos, carga rápida para laptop."}
+];
+const root=document.getElementById("aurex");const $=s=>root.querySelector(s);
+const fmt=n=>"$"+n.toLocaleString("es-CO");
+const api=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(r=>r.json());
+const syncCart=c=>{cart={};c.items.forEach(it=>{if(PRODUCTS.some(p=>p.id==it.id))cart[it.id]=it.quantity});save();renderCart()};
+const icon=c=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[c]||ICONS.Accesorios}</svg>`;
+let cat="Todos",cart={};
+try{cart=JSON.parse(localStorage.getItem("aurex-cart"))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem("aurex-cart",JSON.stringify(cart))}catch(e){}};
+
+function renderChips(){
+  const cats=["Todos",...new Set(PRODUCTS.map(p=>p.cat))];
+  $("#chips").innerHTML=cats.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c}</button>`).join("");
+}
+function renderGrid(){
+  const q=$("#q").value.toLowerCase().trim();
+  const list=PRODUCTS.filter(p=>(cat==="Todos"||p.cat===cat)&&p.name.toLowerCase().includes(q));
+  $("#count").textContent=list.length+" productos";
+  $("#grid").innerHTML=list.map(p=>`<article class="card">
+    <div class="art">${p.image?`<img src="${p.image}" alt="" loading="lazy">`:""}<span class="cat">${p.cat}</span>${p.stock<5?'<span class="low">Últimas unidades</span>':''}${icon(p.cat)}</div>
+    <div class="info"><h3>${p.url?`<a href="${p.url}">${p.name}</a>`:p.name}</h3><p>${p.description}</p>
+    <div class="row"><span class="price">${fmt(p.price)}</span><span class="stock">${p.stock<99?p.stock+" disp.":"Disponible"}</span></div>
+    <button class="add" data-id="${p.id}">Agregar al carrito</button></div></article>`).join("")||'<p class="empty">No hay productos con ese nombre.</p>';
+}
+function renderFeature(){
+  const p=PRODUCTS[0];
+  $("#feature").innerHTML=`<span class="tag">MÁS VENDIDO</span><div class="art">${icon(p.cat)}</div><h3>${p.name}</h3><p style="color:var(--ax-muted);margin:4px 0 10px">${p.description}</p><div class="row"><span class="price">${fmt(p.price)}</span><button class="btn red" data-id="${p.id}">Comprar</button></div>`;
+}
+function renderCart(){
+  const ids=Object.keys(cart);
+  $("#cc").textContent=ids.reduce((a,i)=>a+cart[i],0);
+  if(!ids.length){$("#items").innerHTML='<p class="empty">Tu carrito está vacío.</p>';$("#checkout").innerHTML="";return}
+  let total=0;
+  $("#items").innerHTML=ids.map(i=>{const p=PRODUCTS.find(x=>x.id==i);total+=p.price*cart[i];
+    return `<div class="item"><div><strong>${p.name}</strong><br><small>${fmt(p.price)} c/u</small></div>
+    <div class="qty"><button data-dec="${i}" aria-label="Quitar uno">−</button>${cart[i]}<button data-inc="${i}" aria-label="Agregar uno">+</button></div></div>`}).join("");
+  if(SHOPIFY){$("#checkout").innerHTML=`<div class="total"><span>Total</span><span>${fmt(total)}</span></div><a class="btn red" style="display:block;text-align:center" href="/checkout">Finalizar compra</a>`;return}
+  $("#checkout").innerHTML=`<div class="total"><span>Total</span><span>${fmt(total)}</span></div>
+  <form class="form" id="pay"><input id="nombre" required placeholder="Nombre completo"><input id="dir" required placeholder="Dirección de entrega"><button class="btn red">Confirmar pedido</button></form>`;
+}
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(el._t);el._t=setTimeout(()=>el.hidden=true,1600)}
+root.addEventListener("click",e=>{
+  const t=e.target.closest("button,[data-id]");if(!t)return;
+  if(t.dataset.c){cat=t.dataset.c;renderChips();renderGrid()}
+  if(SHOPIFY){
+    if(t.dataset.id){api("/cart/add.js",{id:+t.dataset.id,quantity:1}).then(()=>fetch("/cart.js")).then(r=>r.json()).then(syncCart).then(()=>toast("Agregado al carrito")).catch(()=>toast("No se pudo agregar"))}
+    if(t.dataset.inc){api("/cart/change.js",{id:String(t.dataset.inc),quantity:cart[t.dataset.inc]+1}).then(syncCart)}
+    if(t.dataset.dec){api("/cart/change.js",{id:String(t.dataset.dec),quantity:cart[t.dataset.dec]-1}).then(syncCart)}
+    return;
+  }
+  if(t.dataset.id){cart[t.dataset.id]=(cart[t.dataset.id]||0)+1;save();renderCart();toast("Agregado al carrito")}
+  if(t.dataset.inc){cart[t.dataset.inc]++;save();renderCart()}
+  if(t.dataset.dec){if(--cart[t.dataset.dec]<=0)delete cart[t.dataset.dec];save();renderCart()}
+});
+root.addEventListener("submit",e=>{e.preventDefault();const n=$("#nombre").value;cart={};save();renderCart();
+  $("#items").innerHTML=`<div class="done"><strong>Pedido confirmado</strong>Gracias, ${n.replace(/</g,"&lt;")}. Pagas al recibir.</div>`});
+$("#openCart").onclick=()=>{$("#drawer").hidden=false};
+$("#closeCart").onclick=()=>{$("#drawer").hidden=true};
+$("#drawer").onclick=e=>{if(e.target.id==="drawer")$("#drawer").hidden=true};
+$("#ofertas").onclick=()=>{cat="Gaming";renderChips();renderGrid();$("#tienda").scrollIntoView({behavior:"smooth"})};
+$("#q").oninput=renderGrid;
+$("#nprod").textContent=PRODUCTS.length;
+renderChips();renderGrid();renderFeature();renderCart();
+if(SHOPIFY)fetch("/cart.js").then(r=>r.json()).then(syncCart).catch(()=>{});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Aurex Store",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "Temporada 2026 · Envíos a toda Colombia" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Tecnología que" },
+    { "type": "text", "id": "title_red", "label": "Título (parte roja)", "default": "pega fuerte." },
+    { "type": "textarea", "id": "text", "label": "Descripción", "default": "Audio, gaming y accesorios seleccionados. Pagas al recibir, devuelves en 30 días." },
+    { "type": "text", "id": "button", "label": "Botón principal", "default": "Ver catálogo" },
+    { "type": "text", "id": "button2", "label": "Botón secundario", "default": "Ofertas de la semana" },
+    { "type": "text", "id": "catalog_title", "label": "Título del catálogo", "default": "Productos destacados" }
+  ],
+  "presets": [{ "name": "Aurex Store" }]
+}
+{% endschema %}

@@ -8,9 +8,6 @@
  * ------------------------------------------------------------
  */
 {
-  "general": {
-    "store": "Aurex Store"
-  },
   "gempages": {
     "Carousel": {
       "no_slider": "No Slider"
@@ -56,5 +53,8 @@
     "Breadcrumb": {
       "home": "Home"
     }
+  },
+  "general": {
+    "store": "Aurex Store"
   }
 }

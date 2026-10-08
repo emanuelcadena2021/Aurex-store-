@@ -1,4 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": { "main": { "type": "aurex-store" } },
-  "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "aurex-store",
+      "settings": {
+        "eyebrow": "CUIDADO PERSONAL • BIENESTAR • CALIDAD",
+        "title": "Cuida de ti. Siéntete mejor.",
+        "title_red": "Todos los días.",
+        "text": "Productos seleccionados para acompañarte en tu rutina de cuidado personal y bienestar.",
+        "button": "DESCUBRIR PRODUCTO →",
+        "button2": "VER OFERTAS",
+        "catalog_title": "Productos destacados"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

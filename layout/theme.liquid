@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="aurex">
-    {% unless template.name == 'index' %}{% render 'aurex-header' %}{% endunless %}
+    {% unless template.name == 'index' or template.name == 'password' %}{% render 'aurex-header' %}{% endunless %}
     {{ content_for_layout }}
     {% render 'aurex-footer' %}
   </div>

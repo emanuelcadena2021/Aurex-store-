@@ -13,12 +13,13 @@
       "type": "aurex-store",
       "settings": {
         "eyebrow": "CUIDADO PERSONAL • BIENESTAR • CALIDAD",
-        "title": "Cuida de ti. Siéntete mejor.",
-        "title_red": "Todos los días.",
+        "title": "Cuida de ti.",
+        "title_red": "Siéntete mejor.",
         "text": "Productos seleccionados para acompañarte en tu rutina de cuidado personal y bienestar.",
-        "button": "DESCUBRIR PRODUCTO →",
-        "button2": "VER OFERTAS",
-        "catalog_title": "Productos destacados"
+        "button": "Descubrir productos",
+        "button2": "",
+        "catalog_title": "Productos destacados",
+        "title_script": "Todos los días."
       }
     }
   },

@@ -985,29 +985,85 @@
 
 }
 </style>
-<header><div class="wrap bar">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+<style>
+#aurex .hdr{position:absolute;top:0;left:0;right:0;z-index:5;background:transparent;border:0;backdrop-filter:none}
+#aurex .hdr .bar{height:96px;gap:28px}
+#aurex .nav{display:flex;gap:30px;margin-left:auto;font-size:15px;font-weight:600}
+#aurex .nav a{position:relative;color:var(--ax-fg);opacity:.9;padding-block:6px}
+#aurex .nav a.on::after,#aurex .nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:3px;border-radius:3px;background:var(--ax-red)}
+#aurex .hdr .search{max-width:320px;margin-left:24px}
+#aurex .hdr .search input{background:rgba(0,0,0,.45);border-color:rgba(255,255,255,.18)}
+#aurex .iconbtn{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:var(--ax-fg);padding:0}
+#aurex .iconbtn svg{width:22px;height:22px}
+#aurex .iconbtn.cartbtn span{position:absolute;top:-6px;right:-6px;margin:0;min-width:20px;height:20px;background:var(--ax-red);color:#fff;font-size:11px;font-weight:800}
+#aurex .hero{min-height:min(860px,100svh);display:flex;flex-direction:column;justify-content:flex-end;padding-top:110px;background:#050506}
+#aurex .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:0}
+#aurex .hero::before{z-index:1;background:linear-gradient(90deg,rgba(5,5,6,.96) 0%,rgba(5,5,6,.85) 32%,rgba(5,5,6,.25) 62%,rgba(5,5,6,0) 100%),linear-gradient(0deg,rgba(5,5,6,.9) 0%,transparent 35%)!important;opacity:1!important}
+#aurex .hero:not(.has-img)::before{background:radial-gradient(ellipse at 75% 40%,rgba(217,16,36,.35),transparent 55%),linear-gradient(90deg,#050506 0%,#0c0d10 60%,#1a070b 100%)!important}
+#aurex .hero::after{content:"";position:absolute;z-index:1!important;inset:auto -10% -2px -10%!important;height:90px;opacity:1!important;pointer-events:none;background:linear-gradient(172deg,transparent 58%,rgba(225,11,30,.85) 60%,transparent 63%),linear-gradient(188deg,transparent 70%,rgba(225,11,30,.55) 72%,transparent 75%)}
+#aurex .hero>.wrap{position:relative;z-index:2;width:100%}
+#aurex .hero .wrap:not(.badges){grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-height:0;padding-block:40px 30px}
+#aurex .hero .feature{display:none}
+#aurex .hero.has-img .wrap:not(.badges){grid-template-columns:minmax(0,1fr)}
+#aurex .hero-copy{max-width:680px}
+#aurex .eyebrow.line{display:flex;align-items:center;gap:18px;letter-spacing:5px;color:var(--ax-fg);opacity:.85;font-size:13px}
+#aurex .eyebrow.line::before{content:"";width:60px;height:2px;background:var(--ax-red);flex:none}
+#aurex .hero h1{font-size:clamp(40px,5.4vw,80px);line-height:.98;margin:26px 0 22px;letter-spacing:-1.5px}
+#aurex .hero h1 .t1,#aurex .hero h1 em{display:block}
+#aurex .hero h1 em{color:var(--ax-red)}
+#aurex .hero h1 .script{display:block;font-family:"Great Vibes",cursive;font-weight:400;font-size:.72em;letter-spacing:0;margin-top:6px;color:var(--ax-fg)}
+#aurex .hero p{font-size:clamp(16px,1.6vw,20px);color:#d6d6d6;max-width:34ch}
+#aurex .btn.pill{border-radius:999px;padding:18px 34px;letter-spacing:2px;text-transform:uppercase;font-size:14px;box-shadow:0 12px 30px -10px rgba(225,11,30,.7)}
+#aurex .btn.ghost.pill{box-shadow:none;border-color:rgba(255,255,255,.3)}
+#aurex .hero .wrap.badges{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;min-height:0;align-items:center;padding-block:28px 64px}
+#aurex .badges>div{display:grid;grid-template-columns:56px 1fr;column-gap:16px;align-items:center;padding-inline:24px;border-left:1px solid rgba(255,255,255,.15)}
+#aurex .badges>div:first-child{border-left:0;padding-left:0}
+#aurex .badges i{grid-row:span 2;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--ax-red);color:var(--ax-red)}
+#aurex .badges i svg{width:24px;height:24px}
+#aurex .badges b{font-size:16px;font-weight:600}
+#aurex .badges small{color:var(--ax-muted);font-size:13px}
+@media(max-width:1000px){#aurex .nav{display:none}#aurex .hero .wrap.badges{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}#aurex .badges>div:nth-child(3){border-left:0;padding-left:0}}
+@media(max-width:640px){#aurex .hdr .search{display:none}#aurex .hdr .bar{height:72px}#aurex .hero{min-height:auto;padding-top:90px}#aurex .hero .wrap:not(.badges){grid-template-columns:1fr;gap:28px}#aurex .hero::before{background:linear-gradient(0deg,rgba(5,5,6,.95) 30%,rgba(5,5,6,.55) 100%)!important}#aurex .hero .wrap.badges{grid-template-columns:1fr}#aurex .badges>div{border-left:0;padding-left:0}}
+</style>
+
+<header class="hdr"><div class="wrap bar">
   <a class="logo" href="#top">AUREX<b>STORE</b></a>
+  <nav class="nav" aria-label="Menú principal">
+    {%- if linklists['main-menu'].links.size > 0 -%}
+      {%- for l in linklists['main-menu'].links -%}<a href="{{ l.url }}"{% if l.active %} class="on"{% endif %}>{{ l.title }}</a>{%- endfor -%}
+    {%- else -%}
+      <a href="#top" class="on">Inicio</a><a href="#tienda">Productos</a><a href="#tienda" data-ofertas>Ofertas</a>
+    {%- endif -%}
+  </nav>
   <div class="search"><input id="q" type="search" placeholder="Buscar productos..." aria-label="Buscar productos"></div>
-  <button class="cartbtn" id="openCart">Carrito<span id="cc">{{ cart.item_count }}</span></button>
+  <a class="iconbtn" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+  <button class="iconbtn cartbtn" id="openCart" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span id="cc">{{ cart.item_count }}</span></button>
 </div></header>
 
-<section class="hero" id="top"><div class="wrap">
-  <div>
-    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
-    <h1>{{ section.settings.title }} <em>{{ section.settings.title_red }}</em></h1>
-    <p>{{ section.settings.text }}</p>
-    <div class="cta"><a class="btn red" href="#tienda">{{ section.settings.button }}</a><button class="btn ghost" id="ofertas">{{ section.settings.button2 }}</button></div>
-    <div class="stats"><div><strong id="nprod">0</strong>productos</div><div><strong>48 h</strong>entrega</div><div><strong>4,9</strong>valoración</div></div>
+<section class="hero{% if section.settings.hero_image %} has-img{% endif %}" id="top">
+  {%- if section.settings.hero_image -%}
+    {{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'hero-bg', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '800,1200,1600,2400', alt: '' }}
+  {%- endif -%}
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow line">{{ section.settings.eyebrow }}</div>
+      <h1><span class="t1">{{ section.settings.title }}</span> <em>{{ section.settings.title_red }}</em>{% if section.settings.title_script != blank %} <span class="script">{{ section.settings.title_script }}</span>{% endif %}</h1>
+      <p>{{ section.settings.text }}</p>
+      <div class="cta"><a class="btn red pill" href="#tienda">{{ section.settings.button }} <span aria-hidden="true">→</span></a>{% if section.settings.button2 != blank %}<button class="btn ghost pill" id="ofertas">{{ section.settings.button2 }}</button>{% endif %}</div>
+      <span id="nprod" hidden>0</span>
+    </div>
+    {%- unless section.settings.hero_image -%}<div class="feature" id="feature"></div>{%- endunless -%}
   </div>
-  <div class="feature" id="feature"></div>
-</div></section>
+  <div class="wrap badges">
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></i><b>Compra segura</b><small>Tus datos protegidos</small></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></i><b>Envíos a Colombia</b><small>Compra desde cualquier lugar</small></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></i><b>Atención al cliente</b><small>Estamos para ayudarte</small></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></i><b>Pagos confiables</b><small>Múltiples métodos de pago</small></div>
+  </div>
+</section>
 
-<section class="perks"><div class="wrap">
-  <div><strong>Envío gratis</strong>en compras desde $200.000</div>
-  <div><strong>Pago contraentrega</strong>efectivo o tarjeta</div>
-  <div><strong>Garantía 12 meses</strong>en todos los equipos</div>
-  <div><strong>Soporte</strong>lunes a sábado</div>
-</div></section>
+
 
 <main class="wrap shop" id="tienda">
   <div class="head"><div><div class="eyebrow">Catálogo</div><h2>{{ section.settings.catalog_title }}</h2></div><div class="count" id="count"></div></div>
@@ -1069,6 +1125,7 @@ function renderGrid(){
     <button class="add" data-id="${p.id}">Agregar al carrito</button></div></article>`).join("")||'<p class="empty">No hay productos con ese nombre.</p>';
 }
 function renderFeature(){
+  if(!$("#feature"))return;
   const p=PRODUCTS[0];
   $("#feature").innerHTML=`<span class="tag">MÁS VENDIDO</span><div class="art">${icon(p.cat)}</div><h3>${p.name}</h3><p style="color:var(--ax-muted);margin:4px 0 10px">${p.description}</p><div class="row"><span class="price">${fmt(p.price)}</span><button class="btn red" data-id="${p.id}">Comprar</button></div>`;
 }
@@ -1103,7 +1160,7 @@ root.addEventListener("submit",e=>{e.preventDefault();const n=$("#nombre").value
 $("#openCart").onclick=()=>{$("#drawer").hidden=false};
 $("#closeCart").onclick=()=>{$("#drawer").hidden=true};
 $("#drawer").onclick=e=>{if(e.target.id==="drawer")$("#drawer").hidden=true};
-$("#ofertas").onclick=()=>{cat="Gaming";renderChips();renderGrid();$("#tienda").scrollIntoView({behavior:"smooth"})};
+root.querySelectorAll("#ofertas,[data-ofertas]").forEach(b=>b.addEventListener("click",()=>{cat="Todos";renderChips();renderGrid();$("#tienda").scrollIntoView({behavior:"smooth"})}));
 $("#q").oninput=renderGrid;
 $("#nprod").textContent=PRODUCTS.length;
 renderChips();renderGrid();renderFeature();renderCart();
@@ -1115,9 +1172,11 @@ if(SHOPIFY)fetch("/cart.js").then(r=>r.json()).then(syncCart).catch(()=>{});
 {
   "name": "Aurex Store",
   "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Imagen de fondo del banner", "info": "Recomendado 2400 × 1300 px, producto a la derecha y espacio oscuro a la izquierda" },
     { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "Temporada 2026 · Envíos a toda Colombia" },
     { "type": "text", "id": "title", "label": "Título", "default": "Tecnología que" },
     { "type": "text", "id": "title_red", "label": "Título (parte roja)", "default": "pega fuerte." },
+    { "type": "text", "id": "title_script", "label": "Título (letra cursiva)", "default": "Todos los días." },
     { "type": "textarea", "id": "text", "label": "Descripción", "default": "Audio, gaming y accesorios seleccionados. Pagas al recibir, devuelves en 30 días." },
     { "type": "text", "id": "button", "label": "Botón principal", "default": "Ver catálogo" },
     { "type": "text", "id": "button2", "label": "Botón secundario", "default": "Ofertas de la semana" },

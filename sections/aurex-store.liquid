@@ -996,6 +996,8 @@
 #aurex .hdr .search input{background:rgba(0,0,0,.45);border-color:rgba(255,255,255,.18)}
 #aurex .iconbtn{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:var(--ax-fg);padding:0}
 #aurex .iconbtn svg{width:22px;height:22px}
+#aurex .hdr .hello{font-size:14px;font-weight:600;white-space:nowrap}
+@media(max-width:640px){#aurex .hdr .hello{display:none}}
 #aurex .iconbtn.cartbtn span{position:absolute;top:-6px;right:-6px;margin:0;min-width:20px;height:20px;background:var(--ax-red);color:#fff;font-size:11px;font-weight:800}
 #aurex .hero{min-height:min(860px,100svh);display:flex;flex-direction:column;justify-content:flex-end;padding-top:110px;background:#050506}
 #aurex .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:0}
@@ -1037,7 +1039,8 @@
     {%- endif -%}
   </nav>
   <div class="search"><input id="q" type="search" placeholder="Buscar productos..." aria-label="Buscar productos"></div>
-  <a class="iconbtn" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
+  {% if customer %}<a class="hello" href="{{ routes.account_url }}">Hola, {{ customer.first_name | default: 'cliente' }}</a>{% endif %}
+  <a class="iconbtn" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}Mi cuenta{% else %}Iniciar sesión o registrarse{% endif %}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a>
   <button class="iconbtn cartbtn" id="openCart" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span id="cc">{{ cart.item_count }}</span></button>
 </div></header>
 

@@ -1,1 +1,46 @@
-<main class="wrap page"><h1>Hola, {{ customer.first_name }}</h1><p class="rte">Pedidos: {{ customer.orders_count }}</p><a class="btn ghost" href="{{ routes.account_logout_url }}">Cerrar sesión</a></main>
+{% render 'aurex-auth-styles' %}
+<main class="wrap acct">
+  <div class="acct-head">
+    <div>
+      <p class="eyebrow">Mi cuenta</p>
+      <h1>Hola, {{ customer.first_name | default: 'cliente' }}</h1>
+    </div>
+    <a class="btn ghost" href="{{ routes.account_logout_url }}">Cerrar sesión</a>
+  </div>
+
+  <div class="acct-grid">
+    <section class="box">
+      <h2>Mis pedidos</h2>
+      {% paginate customer.orders by 10 %}
+        {% if customer.orders.size > 0 %}
+          <table class="orders">
+            <thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th></tr></thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <td>{{ order.name | link_to: order.customer_url }}</td>
+                  <td>{{ order.created_at | date: '%d/%m/%Y' }}</td>
+                  <td>{{ order.financial_status_label }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% if paginate.pages > 1 %}<div class="pager">{{ paginate | default_pagination }}</div>{% endif %}
+        {% else %}
+          <p class="rte">Aún no tienes pedidos. <a href="{{ routes.root_url }}#tienda" style="color:var(--ax-red2)">Ver productos</a></p>
+        {% endif %}
+      {% endpaginate %}
+    </section>
+
+    <aside class="box">
+      <h2>Mis datos</h2>
+      <p class="rte" style="margin:0 0 6px">{{ customer.name }}</p>
+      <p class="rte" style="margin:0 0 16px">{{ customer.email }}</p>
+      {% if customer.default_address %}
+        <div class="rte" style="margin-bottom:16px">{{ customer.default_address | format_address }}</div>
+      {% endif %}
+      <a class="btn ghost" href="{{ routes.account_addresses_url }}">Mis direcciones ({{ customer.addresses_count }})</a>
+    </aside>
+  </div>
+</main>

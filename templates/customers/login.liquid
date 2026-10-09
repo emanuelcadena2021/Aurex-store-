@@ -1,8 +1,60 @@
-<main class="wrap page" style="max-width:480px">
-  <h1>Iniciar sesión</h1>
-  {% form 'customer_login' %}
-    {{ form.errors | default_errors }}
-    <div class="form"><input type="email" name="customer[email]" placeholder="Correo electrónico" required><input type="password" name="customer[password]" placeholder="Contraseña" required><button class="btn red">Ingresar</button></div>
-  {% endform %}
-  <p class="rte">¿No tienes cuenta? <a href="{{ routes.account_register_url }}" style="color:var(--ax-red2)">Regístrate</a></p>
+{% render 'aurex-auth-styles' %}
+<main class="auth">
+  <div class="auth-card">
+    <nav class="auth-tabs" aria-label="Cuenta">
+      <a href="{{ routes.account_login_url }}" aria-current="page">Ingresar</a>
+      <a href="{{ routes.account_register_url }}">Crear cuenta</a>
+    </nav>
+
+    {%- comment -%} Recuperar contraseña: se muestra con #recuperar o tras enviar el formulario {%- endcomment -%}
+    <div id="recuperar-box" hidden>
+      <h1>Recuperar contraseña</h1>
+      <p class="sub">Te enviaremos un correo para crear una contraseña nueva.</p>
+      {% form 'recover_customer_password' %}
+        {% if form.posted_successfully? %}
+          <div class="alert ok">Listo. Revisa tu correo para restablecer la contraseña.</div>
+          <script>window.__axRecover=true</script>
+        {% endif %}
+        {% if form.errors %}<div class="alert err">{{ form.errors | default_errors }}</div><script>window.__axRecover=true</script>{% endif %}
+        <div class="field">
+          <label for="RecoverEmail">Correo electrónico</label>
+          <input type="email" id="RecoverEmail" name="email" autocomplete="email" placeholder="tucorreo@email.com" required>
+        </div>
+        <button class="btn red" type="submit">Enviar enlace</button>
+        <p class="auth-foot"><a href="#ingresar" data-show="login">Volver a iniciar sesión</a></p>
+      {% endform %}
+    </div>
+
+    <div id="ingresar-box">
+      <h1>Bienvenido de nuevo</h1>
+      <p class="sub">Ingresa para ver tus pedidos y comprar más rápido.</p>
+      {% form 'customer_login' %}
+        {% if form.errors %}<div class="alert err">{{ form.errors | default_errors }}</div>{% endif %}
+        <div class="field">
+          <label for="LoginEmail">Correo electrónico</label>
+          <input type="email" id="LoginEmail" name="customer[email]" autocomplete="email" placeholder="tucorreo@email.com" required>
+        </div>
+        <div class="field">
+          <label for="LoginPassword">Contraseña</label>
+          <div class="pw">
+            <input type="password" id="LoginPassword" name="customer[password]" autocomplete="current-password" placeholder="Tu contraseña" required>
+            <button type="button" data-toggle-pw aria-label="Mostrar u ocultar contraseña">Ver</button>
+          </div>
+        </div>
+        <div class="auth-row"><a class="link" href="#recuperar" data-show="recover">¿Olvidaste tu contraseña?</a></div>
+        <button class="btn red" type="submit">Iniciar sesión</button>
+      {% endform %}
+      <p class="auth-foot">¿No tienes cuenta? <a href="{{ routes.account_register_url }}">Regístrate gratis</a></p>
+    </div>
+  </div>
 </main>
+<script>
+(function(){
+  var login=document.getElementById('ingresar-box'),rec=document.getElementById('recuperar-box');
+  function show(r){rec.hidden=!r;login.hidden=r;}
+  if(location.hash==='#recuperar'||window.__axRecover)show(true);
+  document.querySelectorAll('[data-show]').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();show(a.dataset.show==='recover');history.replaceState(null,'',a.getAttribute('href'));});
+  });
+})();
+</script>

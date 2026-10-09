@@ -1,0 +1,50 @@
+<style>
+/* Login, registro y cuenta: tarjeta centrada con pestañas Ingresar / Crear cuenta */
+#aurex .auth{min-height:calc(100svh - 68px);display:grid;place-items:center;padding:48px 20px;background:radial-gradient(ellipse at 80% 0%,rgba(225,11,30,.18),transparent 55%),var(--ax-bg)}
+#aurex .auth-card{width:min(440px,100%);background:linear-gradient(160deg,#17171a,#0f0f11);border:1px solid var(--ax-line);border-radius:20px;padding:32px 28px;box-shadow:0 30px 70px -30px #000}
+#aurex .auth-card h1{font-family:var(--ax-display);font-size:30px;margin:0 0 6px}
+#aurex .auth-card .sub{color:var(--ax-muted);margin:0 0 22px;font-size:14px}
+#aurex .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:24px;background:var(--ax-bg);border:1px solid var(--ax-line);border-radius:12px}
+#aurex .auth-tabs a{text-align:center;padding:10px;border-radius:9px;font-weight:800;color:var(--ax-muted)}
+#aurex .auth-tabs a[aria-current="page"]{background:var(--ax-red);color:#fff}
+#aurex .field{display:grid;gap:6px;margin-bottom:14px}
+#aurex .field label{font-size:13px;font-weight:600}
+#aurex .field input{width:100%;background:var(--ax-bg);border:1px solid var(--ax-line);color:var(--ax-fg);padding:13px 14px;border-radius:10px;font:inherit}
+#aurex .field input:focus{border-color:var(--ax-red2);outline:none}
+#aurex .pw{position:relative}
+#aurex .pw input{padding-right:70px}
+#aurex .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--ax-muted);font-size:12px;font-weight:800;padding:8px}
+#aurex .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#aurex .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ax-muted);margin:4px 0 18px}
+#aurex .check input{accent-color:var(--ax-red);margin-top:2px}
+#aurex .auth-card .btn{width:100%;padding:15px;font-size:15px}
+#aurex .auth-card .link{background:none;border:0;padding:0;color:var(--ax-red2);font-weight:600;font-size:13px}
+#aurex .auth-row{display:flex;justify-content:flex-end;margin:-4px 0 18px}
+#aurex .auth-foot{text-align:center;color:var(--ax-muted);font-size:13px;margin:18px 0 0}
+#aurex .auth-foot a{color:var(--ax-red2);font-weight:600}
+#aurex .alert{border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:16px;border:1px solid}
+#aurex .alert ul{margin:0;padding-left:18px}
+#aurex .alert.err{background:rgba(225,11,30,.1);border-color:rgba(225,11,30,.45);color:#ffb3ba}
+#aurex .alert.ok{background:rgba(60,207,122,.1);border-color:rgba(60,207,122,.45);color:#a6efc4}
+#aurex .acct{padding-block:48px;min-height:60vh}
+#aurex .acct-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+#aurex .acct-head h1{font-family:var(--ax-display);font-size:clamp(28px,4vw,42px);margin:0}
+#aurex .acct-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+#aurex .box{background:var(--ax-panel);border:1px solid var(--ax-line);border-radius:16px;padding:22px}
+#aurex .box h2{font-size:17px;margin:0 0 14px}
+#aurex .orders{width:100%;border-collapse:collapse;font-size:14px}
+#aurex .orders th{text-align:left;color:var(--ax-muted);font-weight:600;font-size:12px;padding:8px 6px;border-bottom:1px solid var(--ax-line)}
+#aurex .orders td{padding:12px 6px;border-bottom:1px solid var(--ax-line)}
+#aurex .orders a{color:var(--ax-red2);font-weight:600}
+@media(max-width:820px){#aurex .acct-grid{grid-template-columns:1fr}}
+@media(max-width:420px){#aurex .two{grid-template-columns:1fr}#aurex .auth-card{padding:26px 20px}}
+</style>
+<script>
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-toggle-pw]');
+  if(!b)return;
+  var i=b.previousElementSibling;
+  i.type=i.type==='password'?'text':'password';
+  b.textContent=i.type==='password'?'Ver':'Ocultar';
+});
+</script>

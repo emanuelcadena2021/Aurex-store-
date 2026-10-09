@@ -1,7 +1,58 @@
-<main class="wrap page" style="max-width:480px">
-  <h1>Crear cuenta</h1>
-  {% form 'create_customer' %}
-    {{ form.errors | default_errors }}
-    <div class="form"><input name="customer[first_name]" placeholder="Nombre" required><input name="customer[last_name]" placeholder="Apellido"><input type="email" name="customer[email]" placeholder="Correo electrónico" required><input type="password" name="customer[password]" placeholder="Contraseña" required><button class="btn red">Registrarse</button></div>
-  {% endform %}
+{% render 'aurex-auth-styles' %}
+<main class="auth">
+  <div class="auth-card">
+    <nav class="auth-tabs" aria-label="Cuenta">
+      <a href="{{ routes.account_login_url }}">Ingresar</a>
+      <a href="{{ routes.account_register_url }}" aria-current="page">Crear cuenta</a>
+    </nav>
+
+    <h1>Crea tu cuenta</h1>
+    <p class="sub">Guarda tus datos, sigue tus pedidos y recibe ofertas exclusivas.</p>
+
+    {% form 'create_customer', id: 'AurexRegister' %}
+      {% if form.errors %}<div class="alert err">{{ form.errors | default_errors }}</div>{% endif %}
+      <div class="alert err" id="PwMismatch" hidden>Las contraseñas no coinciden.</div>
+      <div class="two">
+        <div class="field">
+          <label for="RegFirst">Nombre</label>
+          <input id="RegFirst" name="customer[first_name]" autocomplete="given-name" placeholder="Tu nombre" required>
+        </div>
+        <div class="field">
+          <label for="RegLast">Apellido</label>
+          <input id="RegLast" name="customer[last_name]" autocomplete="family-name" placeholder="Tu apellido">
+        </div>
+      </div>
+      <div class="field">
+        <label for="RegEmail">Correo electrónico</label>
+        <input type="email" id="RegEmail" name="customer[email]" autocomplete="email" placeholder="tucorreo@email.com" required>
+      </div>
+      <div class="field">
+        <label for="RegPassword">Contraseña</label>
+        <div class="pw">
+          <input type="password" id="RegPassword" name="customer[password]" autocomplete="new-password" minlength="5" placeholder="Mínimo 5 caracteres" required>
+          <button type="button" data-toggle-pw aria-label="Mostrar u ocultar contraseña">Ver</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="RegConfirm">Confirmar contraseña</label>
+        <div class="pw">
+          <input type="password" id="RegConfirm" autocomplete="new-password" placeholder="Repite la contraseña" required>
+          <button type="button" data-toggle-pw aria-label="Mostrar u ocultar contraseña">Ver</button>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" name="customer[accepts_marketing]" value="true"> Quiero recibir ofertas y novedades de Aurex Store.</label>
+      <button class="btn red" type="submit">Crear cuenta</button>
+    {% endform %}
+    <p class="auth-foot">¿Ya tienes cuenta? <a href="{{ routes.account_login_url }}">Inicia sesión</a></p>
+  </div>
 </main>
+<script>
+(function(){
+  var f=document.getElementById('AurexRegister'),p=document.getElementById('RegPassword'),c=document.getElementById('RegConfirm'),m=document.getElementById('PwMismatch');
+  if(!f)return;
+  f.addEventListener('submit',function(e){
+    if(p.value!==c.value){e.preventDefault();m.hidden=false;c.focus();}
+  });
+  c.addEventListener('input',function(){if(p.value===c.value)m.hidden=true;});
+})();
+</script>

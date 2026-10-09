@@ -31,16 +31,16 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (name, category, price, stock, description, image_url) VALUES
-('Audífonos Pulse X',     'Audio',       289900,  14, 'Cancelación activa de ruido y 40 h de batería.',   ''),
-('Parlante Volt 360',     'Audio',       219900,   4, 'Sonido envolvente, resistente al agua IP67.',      ''),
-('Teclado Mecánico K87',  'Gaming',      249900,  22, 'Switches rojos, retroiluminación RGB.',            ''),
-('Mouse Viper Pro',       'Gaming',      159900,  31, '26.000 DPI, 58 g, inalámbrico.',                   ''),
-('Control Inferno',       'Gaming',      199900,   3, 'Compatible con PC y consola, gatillos hápticos.',  ''),
-('Laptop Aurex 14',       'Computación', 3299900,  6, 'Ryzen 7, 16 GB RAM, SSD 1 TB.',                    ''),
-('Monitor Crimson 27"',   'Computación', 1149900,  9, 'QHD 165 Hz, panel IPS.',                           ''),
-('Smartphone Nova R',     'Celulares',   1899900, 12, 'Pantalla AMOLED 6,7", 256 GB.',                    ''),
-('Smartwatch Blaze',      'Accesorios',  399900,  18, 'GPS, ritmo cardíaco, 10 días de batería.',         ''),
-('Cargador GaN 65 W',     'Accesorios',  119900,  40, 'Tres puertos, carga rápida para laptop.',          '');
+('Audífonos Pulse X',     'Audio',       289900,  14, 'Cancelación activa de ruido y 40 h de batería.',   '/assets/img/productos/audifonos-pulse-x.svg'),
+('Parlante Volt 360',     'Audio',       219900,   4, 'Sonido envolvente, resistente al agua IP67.',      '/assets/img/productos/parlante-volt-360.svg'),
+('Teclado Mecánico K87',  'Gaming',      249900,  22, 'Switches rojos, retroiluminación RGB.',            '/assets/img/productos/teclado-mecanico-k87.svg'),
+('Mouse Viper Pro',       'Gaming',      159900,  31, '26.000 DPI, 58 g, inalámbrico.',                   '/assets/img/productos/mouse-viper-pro.svg'),
+('Control Inferno',       'Gaming',      199900,   3, 'Compatible con PC y consola, gatillos hápticos.',  '/assets/img/productos/control-inferno.svg'),
+('Laptop Aurex 14',       'Computación', 3299900,  6, 'Ryzen 7, 16 GB RAM, SSD 1 TB.',                    '/assets/img/productos/laptop-aurex-14.svg'),
+('Monitor Crimson 27"',   'Computación', 1149900,  9, 'QHD 165 Hz, panel IPS.',                           '/assets/img/productos/monitor-crimson-27.svg'),
+('Smartphone Nova R',     'Celulares',   1899900, 12, 'Pantalla AMOLED 6,7", 256 GB.',                    '/assets/img/productos/smartphone-nova-r.svg'),
+('Smartwatch Blaze',      'Accesorios',  399900,  18, 'GPS, ritmo cardíaco, 10 días de batería.',         '/assets/img/productos/smartwatch-blaze.svg'),
+('Cargador GaN 65 W',     'Accesorios',  119900,  40, 'Tres puertos, carga rápida para laptop.',          '/assets/img/productos/cargador-gan-65w.svg');
 
 -- ---------------------------------------------------------------------
 -- Clientes (login y registro). La contraseña se guarda cifrada desde la API.

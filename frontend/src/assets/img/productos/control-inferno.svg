@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Control Inferno">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="70%"><stop offset="0" stop-color="#2a0a10"/><stop offset=".55" stop-color="#0e0f12"/><stop offset="1" stop-color="#060708"/></radialGradient>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e10b1e" stop-opacity=".45"/><stop offset="1" stop-color="#e10b1e" stop-opacity="0"/></radialGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3d44"/><stop offset=".5" stop-color="#1c1e22"/><stop offset="1" stop-color="#0d0e10"/></linearGradient>
+  <linearGradient id="metal2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a4e57"/><stop offset="1" stop-color="#15161a"/></linearGradient>
+  <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3347"/><stop offset="1" stop-color="#8f0917"/></linearGradient>
+  <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b0710"/><stop offset=".6" stop-color="#120509"/><stop offset="1" stop-color="#05060a"/></linearGradient>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="600" height="600" fill="url(#bg)"/>
+<ellipse cx="300" cy="300" rx="230" ry="200" fill="url(#glow)"/>
+<path d="M0 520 L600 470 L600 600 L0 600Z" fill="#000" opacity=".35"/>
+<path d="M-20 548 L620 488" stroke="#e10b1e" stroke-width="2" opacity=".55"/>
+<ellipse cx="300" cy="500" rx="190" ry="18" fill="#000" opacity=".6" filter="url(#soft)"/>
+<path d="M150 250 C150 210 185 195 215 195 L385 195 C415 195 450 210 450 250 L490 400 C500 445 455 470 425 440 L380 390 L220 390 L175 440 C145 470 100 445 110 400Z" fill="url(#metal)" stroke="#2c2f35" stroke-width="3"/>
+<path d="M190 196 Q205 175 240 178 L250 196Z" fill="#e10b1e"/><path d="M410 196 Q395 175 360 178 L350 196Z" fill="#e10b1e"/>
+<circle cx="225" cy="285" r="34" fill="#0b0c0e"/>
+<path d="M213 265 h24 v14 h14 v24 h-14 v14 h-24 v-14 h-14 v-24 h14z" fill="#25272c"/>
+<circle cx="388" cy="258" r="13" fill="url(#red)"/>
+<circle cx="414" cy="284" r="13" fill="#25272c" stroke="#e10b1e" stroke-width="3"/>
+<circle cx="362" cy="284" r="13" fill="#25272c" stroke="#e10b1e" stroke-width="3"/>
+<circle cx="388" cy="310" r="13" fill="#25272c" stroke="#e10b1e" stroke-width="3"/>
+<circle cx="262" cy="345" r="26" fill="#0b0c0e" stroke="#30333a" stroke-width="4"/><circle cx="338" cy="345" r="26" fill="#0b0c0e" stroke="#30333a" stroke-width="4"/>
+<circle cx="262" cy="345" r="10" fill="#1d1f24"/><circle cx="338" cy="345" r="10" fill="#1d1f24"/>
+<path d="M285 255 h30" stroke="#e10b1e" stroke-width="5" stroke-linecap="round"/>
+</svg>

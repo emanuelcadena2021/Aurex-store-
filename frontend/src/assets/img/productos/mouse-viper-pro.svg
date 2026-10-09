@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Mouse Viper Pro">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="70%"><stop offset="0" stop-color="#2a0a10"/><stop offset=".55" stop-color="#0e0f12"/><stop offset="1" stop-color="#060708"/></radialGradient>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e10b1e" stop-opacity=".45"/><stop offset="1" stop-color="#e10b1e" stop-opacity="0"/></radialGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3d44"/><stop offset=".5" stop-color="#1c1e22"/><stop offset="1" stop-color="#0d0e10"/></linearGradient>
+  <linearGradient id="metal2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a4e57"/><stop offset="1" stop-color="#15161a"/></linearGradient>
+  <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3347"/><stop offset="1" stop-color="#8f0917"/></linearGradient>
+  <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b0710"/><stop offset=".6" stop-color="#120509"/><stop offset="1" stop-color="#05060a"/></linearGradient>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="600" height="600" fill="url(#bg)"/>
+<ellipse cx="300" cy="300" rx="230" ry="200" fill="url(#glow)"/>
+<path d="M0 520 L600 470 L600 600 L0 600Z" fill="#000" opacity=".35"/>
+<path d="M-20 548 L620 488" stroke="#e10b1e" stroke-width="2" opacity=".55"/>
+<ellipse cx="300" cy="500" rx="190" ry="18" fill="#000" opacity=".6" filter="url(#soft)"/>
+<path d="M300 130 C385 130 410 210 410 300 C410 400 365 470 300 470 C235 470 190 400 190 300 C190 210 215 130 300 130Z" fill="url(#metal)" stroke="#2c2f35" stroke-width="3"/>
+<path d="M300 132 L300 260" stroke="#0b0c0e" stroke-width="5"/>
+<path d="M195 270 Q300 300 405 270" stroke="#0b0c0e" stroke-width="4" fill="none"/>
+<rect x="288" y="168" width="24" height="56" rx="12" fill="#0b0c0e" stroke="url(#red)" stroke-width="4"/>
+<path d="M232 300 C226 360 250 420 300 448 C350 420 374 360 368 300" fill="none" stroke="url(#red)" stroke-width="7" stroke-linecap="round"/>
+<path d="M300 330 l-24 40 h48z" fill="#e10b1e"/>
+<path d="M230 170 Q262 142 296 140" stroke="#fff" stroke-opacity=".22" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>

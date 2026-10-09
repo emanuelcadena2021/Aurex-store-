@@ -13,6 +13,9 @@ namespace Taller3_Ecommerce_API.Models
         [Column("name")]
         public string Name { get; set; } = string.Empty;
 
+        [Column("category")]
+        public string Category { get; set; } = "Accesorios";
+
         [Column("price")]
         public decimal Price { get; set; }
 

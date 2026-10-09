@@ -14,9 +14,21 @@ public class ProductsController : ControllerBase
 
     public ProductsController(AppDbContext db) => _db = db;
 
+    // GET /api/Products?q=mouse&category=Gaming
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetAll()
-        => Ok(await _db.Products.AsNoTracking().ToListAsync());
+    public async Task<ActionResult<IEnumerable<Product>>> GetAll(string? q, string? category)
+    {
+        var query = _db.Products.AsNoTracking();
+        if (!string.IsNullOrWhiteSpace(q))
+            query = query.Where(p => p.Name.Contains(q) || p.Description.Contains(q));
+        if (!string.IsNullOrWhiteSpace(category))
+            query = query.Where(p => p.Category == category);
+        return Ok(await query.OrderBy(p => p.Id).ToListAsync());
+    }
+
+    [HttpGet("categories")]
+    public async Task<ActionResult<IEnumerable<string>>> GetCategories()
+        => Ok(await _db.Products.Select(p => p.Category).Distinct().ToListAsync());
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Product>> GetById(int id)
@@ -42,6 +54,7 @@ public class ProductsController : ControllerBase
         if (existing is null) return NotFound();
 
         existing.Name = product.Name;
+        existing.Category = product.Category;
         existing.Price = product.Price;
         existing.Stock = product.Stock;
         existing.Description = product.Description;

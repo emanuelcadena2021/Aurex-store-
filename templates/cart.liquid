@@ -7,7 +7,9 @@
       {% if item.image %}<img src="{{ item.image | image_url: width: 160 }}" alt="" width="80" height="80">{% else %}<span></span>{% endif %}
       <div><a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a><br><small style="color:var(--ax-muted)">{{ item.variant.title }}</small></div>
       <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Cantidad" style="width:70px">
-      <span class="price">{{ item.final_line_price | money }}</span>
+      <span class="price">{{ item.final_line_price | money }}</span> <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+   style="color:var(--ax-muted);font-size:1.4rem;line-height:1;text-decoration:none;padding:0 8px;"
+   aria-label="Eliminar {{ item.product.title | escape }}">✕</a>
     </div>
     {% endfor %}
     <div class="total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
